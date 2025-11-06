@@ -41,6 +41,7 @@ const Questionnaire = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [responses, setResponses] = useState<Record<number, string>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [sen, setSen] = useState("");
@@ -80,6 +81,8 @@ const Questionnaire = () => {
   };
 
   const handleSubmit = async () => {
+    if (isSubmitting) return;
+
     if (!name || !email) {
       toast({
         title: "Missing Information",
@@ -97,6 +100,8 @@ const Questionnaire = () => {
       });
       return;
     }
+
+    setIsSubmitting(true);
 
     try {
       // Replace this URL with your deployed Google Apps Script URL
@@ -134,6 +139,8 @@ const Questionnaire = () => {
         description: "There was an error submitting your responses. Please try again.",
         variant: "destructive",
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -296,8 +303,12 @@ const Questionnaire = () => {
                 Next
               </Button>
             ) : (
-              <Button onClick={handleSubmit} className="bg-primary hover:bg-primary/90">
-                Submit
+              <Button 
+                onClick={handleSubmit} 
+                disabled={isSubmitting}
+                className="bg-primary hover:bg-primary/90"
+              >
+                {isSubmitting ? "Submitting..." : "Submit"}
               </Button>
             )}
           </div>
