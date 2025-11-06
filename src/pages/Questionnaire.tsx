@@ -219,7 +219,7 @@ const Questionnaire = () => {
                   <Label htmlFor="sen">SEN *</Label>
                   <Input
                     id="sen"
-                    type="sen"
+                    type="text"
                     value={sen}
                     onChange={(e) => setSen(e.target.value)}
                     placeholder="Enter your SEN"
