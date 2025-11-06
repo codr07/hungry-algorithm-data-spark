@@ -99,7 +99,7 @@ const Questionnaire = () => {
 
     try {
       // Replace this URL with your deployed Google Apps Script URL
-      const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL";
+      const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxzcusSmBAegMqHS38qZO2ClxlzknscpC-ollL0nzrFpD46b1jbR1U3mS2mJelt6c66/exec";
       
       const formData = {
         timestamp: new Date().toISOString(),
