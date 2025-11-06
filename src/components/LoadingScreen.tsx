@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Code2 } from "lucide-react";
+import datalogixLogo from "@/assets/datalogix-logo.jpg";
 
 interface LoadingScreenProps {
   onLoadingComplete: () => void;
@@ -27,7 +27,7 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
     <div className="fixed inset-0 bg-background z-50 flex flex-col items-center justify-center">
       <div className="text-center space-y-8 animate-fade-in">
         <div className="flex items-center justify-center gap-4">
-          <Code2 className="w-16 h-16 text-primary animate-pulse-slow" />
+          <img src={datalogixLogo} alt="DataLogix Club" className="w-24 h-24 animate-pulse-slow rounded-full" />
         </div>
         
         <div className="space-y-2">
