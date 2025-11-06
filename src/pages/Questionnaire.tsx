@@ -245,17 +245,6 @@ const Questionnaire = () => {
                     className="bg-background border-border"
                   />
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="sen">SEN *</Label>
-                  <Input
-                    id="sen"
-                    type="text"
-                    value={sen}
-                    onChange={(e) => setSen(e.target.value)}
-                    placeholder="Enter your SEN"
-                    className="bg-background border-border"
-                  />
-                </div>
               </div>
             </Card>
           )}
