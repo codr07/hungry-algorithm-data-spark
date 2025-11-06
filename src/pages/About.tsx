@@ -12,12 +12,41 @@ const About = () => {
           {/* Header */}
           <div className="text-center space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold text-foreground">
-              About Hungry Algorithm
+              THE HUNGRY ALGORITHM
             </h1>
             <p className="text-xl text-muted-foreground">
               Understanding emotions through data science
             </p>
           </div>
+
+          {/* Event Details */}
+          <Card className="p-8 bg-card border-border">
+            <div className="space-y-6">
+              <h2 className="text-2xl font-semibold text-foreground text-center">Event Details</h2>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <p className="text-sm text-muted-foreground">Event Name</p>
+                  <p className="text-lg font-semibold text-foreground">THE HUNGRY ALGORITHM</p>
+                </div>
+                <div className="space-y-2">
+                  <p className="text-sm text-muted-foreground">Date</p>
+                  <p className="text-lg font-semibold text-foreground">11th November 2025 (Tuesday)</p>
+                </div>
+                <div className="space-y-2">
+                  <p className="text-sm text-muted-foreground">Venue</p>
+                  <p className="text-lg font-semibold text-foreground">Seminar Hall</p>
+                </div>
+                <div className="space-y-2">
+                  <p className="text-sm text-muted-foreground">Time</p>
+                  <p className="text-lg font-semibold text-foreground">Will be disclosed soon</p>
+                </div>
+                <div className="space-y-2 md:col-span-2">
+                  <p className="text-sm text-muted-foreground">Host</p>
+                  <p className="text-lg font-semibold text-foreground">Will be disclosed soon</p>
+                </div>
+              </div>
+            </div>
+          </Card>
 
           {/* Main Description */}
           <Card className="p-8 bg-card border-border">
