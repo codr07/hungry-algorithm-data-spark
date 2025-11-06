@@ -7,33 +7,33 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import Navbar from "@/components/Navbar";
 import { useToast } from "@/hooks/use-toast";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Star } from "lucide-react";
 
 const questions = [
-  { id: 1, text: "How would you rate your overall experience with data science?", type: "scale" },
+  { id: 1, text: "How would you rate your overall experience with data science?", type: "rating" },
   { id: 2, text: "What motivates you to learn about machine learning?", type: "text" },
-  { id: 3, text: "How confident are you in your programming skills?", type: "scale" },
-  { id: 4, text: "Which aspect of data science interests you the most?", type: "text" },
-  { id: 5, text: "How often do you work on data science projects?", type: "scale" },
-  { id: 6, text: "What challenges do you face in learning data science?", type: "text" },
-  { id: 7, text: "How comfortable are you with statistical concepts?", type: "scale" },
-  { id: 8, text: "Describe your experience with data visualization tools", type: "text" },
-  { id: 9, text: "How would you rate your problem-solving abilities?", type: "scale" },
-  { id: 10, text: "What is your preferred learning method for new concepts?", type: "text" },
-  { id: 11, text: "How confident are you in explaining technical concepts?", type: "scale" },
-  { id: 12, text: "What are your career goals in data science?", type: "text" },
-  { id: 13, text: "How do you handle setbacks in learning?", type: "scale" },
-  { id: 14, text: "Describe a data science project you're proud of", type: "text" },
-  { id: 15, text: "How well do you work in team environments?", type: "scale" },
-  { id: 16, text: "What areas of data science do you want to explore?", type: "text" },
-  { id: 17, text: "How organized are you with your study materials?", type: "scale" },
-  { id: 18, text: "What is your approach to debugging code?", type: "text" },
-  { id: 19, text: "How adaptable are you to new technologies?", type: "scale" },
-  { id: 20, text: "Describe your experience with machine learning frameworks", type: "text" },
-  { id: 21, text: "How do you stay updated with data science trends?", type: "scale" },
-  { id: 22, text: "What motivates you to participate in data science events?", type: "text" },
-  { id: 23, text: "How confident are you in presenting your work?", type: "scale" },
-  { id: 24, text: "What is your approach to learning from failures?", type: "text" }
+  { id: 3, text: "Which programming language are you most comfortable with?", type: "mcq", options: ["Python", "R", "JavaScript", "Other"] },
+  { id: 4, text: "How confident are you in your programming skills?", type: "rating" },
+  { id: 5, text: "Which aspect of data science interests you the most?", type: "text" },
+  { id: 6, text: "What is your current level of education?", type: "mcq", options: ["High School", "Undergraduate", "Graduate", "Professional"] },
+  { id: 7, text: "How often do you work on data science projects?", type: "rating" },
+  { id: 8, text: "What challenges do you face in learning data science?", type: "text" },
+  { id: 9, text: "Which area of data science do you want to focus on?", type: "mcq", options: ["Machine Learning", "Deep Learning", "Data Analytics", "Big Data"] },
+  { id: 10, text: "How comfortable are you with statistical concepts?", type: "rating" },
+  { id: 11, text: "Describe your experience with data visualization tools", type: "text" },
+  { id: 12, text: "What is your preferred learning style?", type: "mcq", options: ["Visual", "Hands-on", "Reading", "Listening"] },
+  { id: 13, text: "How would you rate your problem-solving abilities?", type: "rating" },
+  { id: 14, text: "What is your preferred learning method for new concepts?", type: "text" },
+  { id: 15, text: "Which tool do you use most frequently?", type: "mcq", options: ["Jupyter Notebook", "VS Code", "PyCharm", "RStudio"] },
+  { id: 16, text: "How confident are you in explaining technical concepts?", type: "rating" },
+  { id: 17, text: "What are your career goals in data science?", type: "text" },
+  { id: 18, text: "How do you handle setbacks in learning?", type: "rating" },
+  { id: 19, text: "Describe a data science project you're proud of", type: "text" },
+  { id: 20, text: "How well do you work in team environments?", type: "rating" },
+  { id: 21, text: "What areas of data science do you want to explore?", type: "text" },
+  { id: 22, text: "How organized are you with your study materials?", type: "rating" },
+  { id: 23, text: "What is your approach to debugging code?", type: "text" },
+  { id: 24, text: "How adaptable are you to new technologies?", type: "rating" }
 ];
 
 const Questionnaire = () => {
@@ -229,12 +229,36 @@ const Questionnaire = () => {
                   {question.id}. {question.text}
                 </h3>
                 
-                {question.type === "scale" ? (
+                {question.type === "rating" ? (
+                  <div className="flex items-center gap-2">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <button
+                        key={star}
+                        type="button"
+                        onClick={() => handleResponse(question.id, star.toString())}
+                        className="transition-all hover:scale-110"
+                      >
+                        <Star
+                          className={`w-8 h-8 ${
+                            parseInt(responses[question.id] || "0") >= star
+                              ? "fill-primary text-primary"
+                              : "text-muted-foreground"
+                          }`}
+                        />
+                      </button>
+                    ))}
+                    {responses[question.id] && (
+                      <span className="ml-2 text-sm text-muted-foreground">
+                        ({responses[question.id]}/5)
+                      </span>
+                    )}
+                  </div>
+                ) : question.type === "mcq" ? (
                   <RadioGroup
                     value={responses[question.id] || ""}
                     onValueChange={(value) => handleResponse(question.id, value)}
                   >
-                    {["1 - Very Low", "2 - Low", "3 - Moderate", "4 - High", "5 - Very High"].map((option) => (
+                    {question.options?.map((option) => (
                       <div key={option} className="flex items-center space-x-2">
                         <RadioGroupItem value={option} id={`q${question.id}-${option}`} />
                         <Label htmlFor={`q${question.id}-${option}`} className="cursor-pointer">
