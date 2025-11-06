@@ -119,20 +119,50 @@ const Questionnaire = () => {
         }))
       };
 
-      const response = await fetch(GOOGLE_SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      // Try a normal POST first (this requires the Apps Script to allow CORS).
+      // Avoid `mode: 'no-cors'` because it results in an opaque response and often an empty body on the server.
+      try {
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
 
-      setSubmitted(true);
-      toast({
-        title: "Success!",
-        description: "Your responses have been submitted successfully.",
-      });
+        // If the server responded OK, mark submitted. If the response is opaque or blocked by CORS,
+        // this `await` may throw or `response.ok` may be false — in that case we'll fall back below.
+        if (response && response.ok) {
+          setSubmitted(true);
+          toast({
+            title: "Success!",
+            description: "Your responses have been submitted successfully.",
+          });
+        } else {
+          // If response is not ok (or undefined), throw to trigger fallback
+          throw new Error("Non-OK response from server or opaque response (possible CORS)");
+        }
+      } catch (err) {
+        // Fallback: open a new window using GET with query params. Many Apps Script endpoints accept GET (doGet)
+        // and this avoids the client-side CORS restriction. This will open a new tab to submit the data.
+        console.warn("POST failed or CORS blocked, falling back to GET submit:", err);
+
+        const params = new URLSearchParams();
+        params.set("timestamp", formData.timestamp);
+        params.set("name", formData.name);
+        params.set("email", formData.email);
+        params.set("sen", formData.sen);
+        params.set("responses", JSON.stringify(formData.responses));
+
+        // Open in new tab so the browser can perform the request even if CORS is restricted for fetch.
+        window.open(`${GOOGLE_SCRIPT_URL}?${params.toString()}`, "_blank");
+
+        setSubmitted(true);
+        toast({
+          title: "Submitted (fallback)",
+          description: "Opened a new tab to submit your responses. If the spreadsheet doesn't update, check the Apps Script deployment permissions.",
+        });
+      }
     } catch (error) {
       console.error("Error submitting form:", error);
       toast({
