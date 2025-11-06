@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Calendar, Users, FileText } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import amityLogo from "@/assets/amity-logo.png";
+import datalogixLogo from "@/assets/datalogix-logo.jpg";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -22,8 +23,9 @@ const Landing = () => {
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               A Sentiment Analysis Event by DataLogix Club
             </p>
-            <div className="flex items-center justify-center gap-3">
-              <img src={amityLogo} alt="Amity University Bengaluru" className="h-12" />
+            <div className="flex items-center justify-center gap-6">
+              <img src={datalogixLogo} alt="DataLogix Club" className="h-16 w-16 rounded-full object-cover" />
+              <img src={amityLogo} alt="Amity University Bengaluru" className="h-16" />
             </div>
             <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
               <span>Department of M.Sc Data Science, AIIT</span>
