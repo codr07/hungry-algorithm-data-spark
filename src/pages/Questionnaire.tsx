@@ -33,8 +33,7 @@ const questions = [
   { id: 21, text: "How do you stay updated with data science trends?", type: "scale" },
   { id: 22, text: "What motivates you to participate in data science events?", type: "text" },
   { id: 23, text: "How confident are you in presenting your work?", type: "scale" },
-  { id: 24, text: "What is your approach to learning from failures?", type: "text" },
-  { id: 25, text: "How would you rate your enthusiasm for data science?", type: "scale" },
+  { id: 24, text: "What is your approach to learning from failures?", type: "text" }
 ];
 
 const Questionnaire = () => {
@@ -43,6 +42,7 @@ const Questionnaire = () => {
   const [submitted, setSubmitted] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [sen, setSen] = useState("");
   const { toast } = useToast();
   
   const questionsPerPage = 5;
@@ -203,6 +203,17 @@ const Questionnaire = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
+                    className="bg-background border-border"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="sen">SEN *</Label>
+                  <Input
+                    id="email"
+                    type="sen"
+                    value={sen}
+                    onChange={(e) => setSen(e.target.value)}
+                    placeholder="Enter your SEN"
                     className="bg-background border-border"
                   />
                 </div>
