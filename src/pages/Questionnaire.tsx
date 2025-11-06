@@ -86,7 +86,7 @@ const Questionnaire = () => {
     if (!name || !email || !sen) {
       toast({
         title: "Missing Information",
-        description: "Please provide your name and email.",
+        description: "Please provide your name, email, and SEN.",
         variant: "destructive",
       });
       return;
