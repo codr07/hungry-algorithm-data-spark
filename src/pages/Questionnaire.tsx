@@ -78,7 +78,7 @@ const Questionnaire = () => {
     window.scrollTo(0, 0);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!name || !email) {
       toast({
         title: "Missing Information",
@@ -97,14 +97,43 @@ const Questionnaire = () => {
       return;
     }
 
-    // Here you would normally send the data to Google Sheets
-    console.log({ name, email, responses });
-    
-    setSubmitted(true);
-    toast({
-      title: "Success!",
-      description: "Your responses have been submitted successfully.",
-    });
+    try {
+      // Replace this URL with your deployed Google Apps Script URL
+      const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL";
+      
+      const formData = {
+        timestamp: new Date().toISOString(),
+        name,
+        email,
+        responses: questions.map(q => ({
+          questionId: q.id,
+          question: q.text,
+          answer: responses[q.id] || ""
+        }))
+      };
+
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      setSubmitted(true);
+      toast({
+        title: "Success!",
+        description: "Your responses have been submitted successfully.",
+      });
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: "Submission Error",
+        description: "There was an error submitting your responses. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   if (submitted) {
