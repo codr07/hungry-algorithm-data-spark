@@ -1,41 +1,62 @@
 import { Card } from "@/components/ui/card";
 import Navbar from "@/components/Navbar";
-import { User } from "lucide-react";
+import sharanyaImg from "@/assets/members/sharanya.jpg";
+import sreyaImg from "@/assets/members/sreya.jpg";
+import reshmaImg from "@/assets/members/reshma.jpg";
+import sidharthImg from "@/assets/members/sidharth.jpg";
+import janetImg from "@/assets/members/janet.jpg";
+import vishwasImg from "@/assets/members/vishwas.jpg";
+import abhishekImg from "@/assets/members/abhishek.jpg";
 
 interface Member {
   name: string;
   role: string;
-  image?: string;
+  image: string;
+  year: string;
 }
 
 const members: Member[] = [
   {
-    name: "President Name",
+    name: "Ms. Sharanya M",
     role: "President",
+    image: sharanyaImg,
+    year: "II M.Sc Data Science",
   },
   {
-    name: "Vice President Name",
-    role: "Vice-President",
+    name: "Ms. Sreya Virdikar",
+    role: "Vice President",
+    image: sreyaImg,
+    year: "II M.Sc Data Science",
   },
   {
-    name: "Secretary Name",
+    name: "Ms. Reshma K",
     role: "Secretary",
+    image: reshmaImg,
+    year: "II M.Sc Data Science",
   },
   {
-    name: "Tech Lead 1",
-    role: "Tech Lead",
+    name: "Mr. Sidharth V",
+    role: "Technical Lead-I",
+    image: sidharthImg,
+    year: "II M.Sc Data Science",
   },
   {
-    name: "Tech Lead 2",
-    role: "Tech Lead",
+    name: "Ms. Janet Johnson",
+    role: "Technical Lead-II",
+    image: janetImg,
+    year: "II M.Sc Data Science",
   },
   {
-    name: "Marketing Manager Name",
-    role: "Promotion and Marketing Manager",
-  },
-  {
-    name: "Networking Lead Name",
+    name: "Mr. Vishwas K",
     role: "Networking Lead",
+    image: vishwasImg,
+    year: "II M.Sc Data Science",
+  },
+  {
+    name: "Mr. Abhishek Augustine",
+    role: "Promotion & Marketing Lead",
+    image: abhishekImg,
+    year: "II M.Sc Data Science",
   },
 ];
 
@@ -65,8 +86,12 @@ const Members = () => {
               >
                 <div className="space-y-4">
                   {/* Avatar */}
-                  <div className="w-24 h-24 mx-auto rounded-full bg-secondary flex items-center justify-center group-hover:bg-primary/10 transition-colors">
-                    <User className="w-12 h-12 text-muted-foreground group-hover:text-primary transition-colors" />
+                  <div className="w-24 h-24 mx-auto rounded-full overflow-hidden bg-secondary group-hover:ring-2 group-hover:ring-primary transition-all">
+                    <img 
+                      src={member.image} 
+                      alt={member.name}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   
                   {/* Info */}
@@ -76,6 +101,9 @@ const Members = () => {
                     </h3>
                     <p className="text-sm text-primary font-medium">
                       {member.role}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {member.year}
                     </p>
                   </div>
                 </div>
