@@ -83,7 +83,7 @@ const Questionnaire = () => {
   const handleSubmit = async () => {
     if (isSubmitting) return;
 
-    if (!name || !email || !sen) {
+    if (!name || !email) {
       toast({
         title: "Missing Information",
         description: "Please provide your name and email.",
