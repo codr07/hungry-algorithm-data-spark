@@ -83,7 +83,7 @@ const Questionnaire = () => {
   const handleSubmit = async () => {
     if (isSubmitting) return;
 
-    if (!name || !email) {
+    if (!name || !email || !sen) {
       toast({
         title: "Missing Information",
         description: "Please provide your name and email.",
@@ -111,6 +111,7 @@ const Questionnaire = () => {
         timestamp: new Date().toISOString(),
         name,
         email,
+        sen,
         responses: questions.map(q => ({
           questionId: q.id,
           question: q.text,
@@ -217,7 +218,7 @@ const Questionnaire = () => {
                 <div className="space-y-2">
                   <Label htmlFor="sen">SEN *</Label>
                   <Input
-                    id="email"
+                    id="sen"
                     type="sen"
                     value={sen}
                     onChange={(e) => setSen(e.target.value)}
