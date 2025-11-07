@@ -35,7 +35,6 @@ const questions = [
   { id: 23, text: "Why do you prefer MRC over Kuksi ? Choose one of the below options:", type: "mcq" , options: ["Distance from academic block ", "wifi works better", "quality/quantity/taste/ambience", "To bunk classes", "Service", "Others"] },
   { id: 24, text: "If your answer is others in Q23 then please specify your answer :", type: "text" },
   { id: 25, text: "If tea and coffee were superheroes, which canteen would win the showdown? ", type: "mcq" , options: ["MRC Canteen", "Kuksi Canteen", "Both", "None of Them"] },
-  { id: 26, text: "SEN : ", type: "text" },
 ];
 
 const Questionnaire = () => {
