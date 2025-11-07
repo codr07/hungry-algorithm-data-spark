@@ -83,10 +83,10 @@ const Questionnaire = () => {
   const handleSubmit = async () => {
     if (isSubmitting) return;
 
-    if (!name || !email) {
+    if (!name || !email || !sen) {
       toast({
         title: "Missing Information",
-        description: "Please provide your name and email.",
+        description: "Please provide your name, email, and SEN.",
         variant: "destructive",
       });
       return;
@@ -212,6 +212,16 @@ const Questionnaire = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
+                    className="bg-background border-border"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="sen">SEN *</Label>
+                  <Input
+                    id="sen"
+                    value={sen}
+                    onChange={(e) => setSen(e.target.value)}
+                    placeholder="Enter your SEN"
                     className="bg-background border-border"
                   />
                 </div>
