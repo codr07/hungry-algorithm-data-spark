@@ -35,6 +35,7 @@ const questions = [
   { id: 23, text: "Why do you prefer MRC over Kuksi ? Choose one of the below options:", type: "mcq" , options: ["Distance from academic block ", "wifi works better", "quality/quantity/taste/ambience", "To bunk classes", "Service", "Others"] },
   { id: 24, text: "If your answer is others in Q23 then please specify your answer :", type: "text" },
   { id: 25, text: "If tea and coffee were superheroes, which canteen would win the showdown? ", type: "mcq" , options: ["MRC Canteen", "Kuksi Canteen", "Both", "None of Them"] },
+  { id: 26, text: "SEN : ", type: "text" },
 ];
 
 const Questionnaire = () => {
@@ -44,7 +45,6 @@ const Questionnaire = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [sen, setSen] = useState("");
   const { toast } = useToast();
   
   const questionsPerPage = 5;
@@ -83,10 +83,10 @@ const Questionnaire = () => {
   const handleSubmit = async () => {
     if (isSubmitting) return;
 
-    if (!name || !email || !sen) {
+    if (!name || !email) {
       toast({
         title: "Missing Information",
-        description: "Please provide your name, email, and SEN.",
+        description: "Please provide your name and email.",
         variant: "destructive",
       });
       return;
@@ -111,7 +111,6 @@ const Questionnaire = () => {
         timestamp: new Date().toISOString(),
         name,
         email,
-        sen,
         responses: questions.map(q => ({
           questionId: q.id,
           question: q.text,
@@ -212,16 +211,6 @@ const Questionnaire = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
-                    className="bg-background border-border"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="sen">SEN *</Label>
-                  <Input
-                    id="sen"
-                    value={sen}
-                    onChange={(e) => setSen(e.target.value)}
-                    placeholder="Enter your SEN"
                     className="bg-background border-border"
                   />
                 </div>

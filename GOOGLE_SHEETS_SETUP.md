@@ -17,11 +17,10 @@ In Row 1, add these column headers:
 - A1: Timestamp
 - B1: Name
 - C1: Email
-- D1: SEN
-- E1: Question 1
-- F1: Question 2
+- D1: Question 1
+- E1: Question 2
 - ... continue up to ...
-- AC1: Question 25
+- AC1: Question 26
 
 ## Step 3: Create the Apps Script
 
@@ -42,12 +41,11 @@ function doPost(e) {
     const rowData = [
       data.timestamp,
       data.name,
-      data.email,
-      data.sen || ""
+      data.email
     ];
     
-    // Add all 25 responses in order
-    for (let i = 1; i <= 25; i++) {
+    // Add all 26 responses in order
+    for (let i = 1; i <= 26; i++) {
       const response = data.responses.find(r => r.questionId === i);
       rowData.push(response ? response.answer : "");
     }
